@@ -1,6 +1,5 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client'
-import { applyPlugin } from 'nuxt/app'
 
 const prisma = new PrismaClient()
 const app = express()
