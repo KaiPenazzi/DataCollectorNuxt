@@ -10,8 +10,11 @@ export default defineEventHandler(async (event) => {
                 password: user.psw
             }
         })
-        return result
+
+        if (result.length == 1) {
+            return true
+        }
     }
 
-    return
+    return false
 })

@@ -13,9 +13,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         body: userSend
     })
 
-    if (user.value?.length == 1) {
+    if (user.value) {
         return
     }
 
-    return navigateTo('/login')
+    return navigateTo('/user/login')
 })
