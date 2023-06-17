@@ -7,9 +7,13 @@ definePageMeta({
 
 const {data: devices} = await useFetch('/api/devices')
 
+function openAdd() {
+    window.open('/device/add', '_self')
+}
 </script>
 
 <template>
+    <button class="btn btn-success" @click="openAdd">add</button>
     <div class="card" v-for="item in devices">
         <div class="card-header">{{ item.name }}</div>
         <div class="card-body">
