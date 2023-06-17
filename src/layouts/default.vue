@@ -15,6 +15,12 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/actions">Actions</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/login">login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/register">register</a>
+                    </li>
                 </ul>
             </div>
         </nav>

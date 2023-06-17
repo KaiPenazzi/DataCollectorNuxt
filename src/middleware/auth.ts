@@ -1,23 +1,20 @@
-import prisma from '../prisma/prisma'
+//import prisma from '../prisma/prisma'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     // skip middleware on client side entirely
-    if (process.client) return
 
-    const email = useCookie("email");
-    const psw = useCookie("psw");
+    const userSend = {
+        email: useCookie("email"),
+        psw: useCookie("psw")
+    }
 
-    if (email.value != undefined && psw.value != undefined) {
-        const res = await prisma.user.findMany({
-            where: {
-                email: email.value,
-                password: psw.value
-            }
-        })
+    let {data: user} = await useFetch('/api/checkUser', {
+        method: "post",
+        body: userSend
+    })
 
-        if (res.length == 1) {
-            return
-        }
+    if (user.value?.length == 1) {
+        return
     }
 
     return navigateTo('/login')
