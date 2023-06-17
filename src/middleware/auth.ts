@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from '../prisma/prisma'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     // skip middleware on client side entirely
     if (process.client) return
-
-    const prisma = new PrismaClient();
 
     const email = useCookie("email");
     const psw = useCookie("psw");
