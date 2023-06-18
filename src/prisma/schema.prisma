@@ -10,6 +10,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model data {
+  id Int @id @default(autoincrement())
+  collectedDate DateTime?
+  dataString String?
+  device Device? @relation(fields: [deviceid], references: [id])
+  deviceid Int?
+}
 
 model Device {
   id Int @id @default(autoincrement())
@@ -19,6 +26,7 @@ model Device {
   key String?
   user User? @relation(fields: [userid], references: [id])
   userid Int?
+  data data[]
 }
 
 model User {
