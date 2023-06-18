@@ -13,11 +13,18 @@ function openAdd() {
     })
 }
 
-function remove(id) {
-    useFetch('/api/device/' + id, {
-        method: "delete"
-    })
-    location.reload(true);
+async function remove(id) {
+    const confirmed = confirm("confirm to remove the device")
+
+    if (confirmed) {
+        // DELETE-Anfrage an die API senden
+        await useFetch('/api/device/' + id, {
+            method: 'delete'
+        });
+
+        // Seite neu laden
+        location.reload(true);
+    }
 }
 
 function edit(id) {
