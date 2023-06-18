@@ -10,7 +10,12 @@ export default defineNuxtModule({
         const result = await prisma.device.findMany()
 
         for (let i = 0; i < result.length; i++) {
-            broker.addClient(result[i])
+            broker.addClient({
+                id: result[i].id,
+                username: result[i].username + "",
+                device_id: result[i].device_id + "",
+                key: result[i].key + ""
+            })
         }
     }
 })

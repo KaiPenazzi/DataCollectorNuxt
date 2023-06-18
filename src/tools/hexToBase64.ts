@@ -1,4 +1,4 @@
-function hexToBase64(hexString:String) {
+export default function hexToBase64(hexString:String) {
     // Konvertiere den Hex-String in ein Buffer-Objekt
     const buffer = Buffer.from(hexString, 'hex');
 
@@ -7,5 +7,3 @@ function hexToBase64(hexString:String) {
 
     return base64String;
 }
-
-module.exports = {hexToBase64}
