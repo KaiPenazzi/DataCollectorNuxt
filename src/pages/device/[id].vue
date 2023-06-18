@@ -6,6 +6,7 @@ definePageMeta({
         "auth"
     ]
 })
+
 const route = useRoute()
 
 let name = ref(0)
@@ -13,14 +14,31 @@ let username = ref(0)
 let device_id = ref(0)
 let key = ref(0)
 
-onMounted(async ()=> {
-    const device = await useFetch('/api/device/' + route.params.id)
 
-    name.value.value = device.name
-    username.value.value = device.username
-    device_id.value.value = device.device_id
+const {data: device} = await useFetch('/api/device/' + route.params.id)
+
+onMounted(()=> {
+    name.value.value = device.value.name
+    username.value.value = device.value.username
+    device_id.value.value = device.value.device_id
     key.value.value = device.key
 })
+
+function updateDevice() {
+    useFetch('/api/device/' + route.params.id, {
+        method: "put",
+        body: {
+            name: name.value.value,
+            username: username.value.value,
+            device_id: device_id.value.value,
+            key: key.value.value
+        }
+    })
+
+    navigateTo({
+        path: "/devices"
+    })
+}
 
 </script>
 
