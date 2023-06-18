@@ -78,4 +78,4 @@ class mqttBroker {
     }
 }
 
-module.exports = mqttBroker
+export default mqttBroker

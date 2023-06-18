@@ -1,5 +1,5 @@
 import { defineNuxtModule } from 'nuxt/kit'
-import broker from '../mqtt/broker'
+import broker from '../mqttStuff/broker'
 import prisma from '../prisma/prisma'
 
 export default defineNuxtModule({
