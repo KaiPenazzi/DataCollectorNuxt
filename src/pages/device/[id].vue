@@ -52,7 +52,7 @@ function updateDevice() {
             <input class="form-control" type="text" ref="key" placeholder="key" />
         </div>
         <div class="card-footer">
-            <button class="btn btn-success" @click="updateDevice">update</button>
+            <button class="btn btn-primary" @click="updateDevice">update</button>
         </div>
     </div>
 </template>
