@@ -12,7 +12,11 @@ class mqttBroker {
     addClient(device) {
         device.port = 1883;
         var topic = 'v3/' + device.username + '/devices/' + device.device_id + '/up'
-        var client = mqtt.connect("mqtt://eu1.cloud.thethings.network", device)
+        var client = mqtt.connect("mqtt://eu1.cloud.thethings.network", {
+            username: device.username,
+            device_id: device.device_id,
+            password: device.key
+        })
 
         client.on("connect", () => {
             console.log('device : ' + device.username + " connected: " + client.connected)
@@ -24,15 +28,15 @@ class mqttBroker {
 
         client.on("message", async (topic, msg) => {
 
-            console.log(await prisma.user.create({
+            await prisma.data.create({
                 data: {
                     collectedDate: new Date(),
-                    dataString: msg,
+                    dataString: msg.toString(),
                     device: {
                         connect: {id: device.id}
                     }
                 }
-            }))
+            })
         })
 
         client.on('error', function (error) {
