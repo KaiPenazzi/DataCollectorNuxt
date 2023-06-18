@@ -8,7 +8,9 @@ definePageMeta({
 const {data: devices} = await useFetch('/api/devices')
 
 function openAdd() {
-    window.open('/device/add', '_self')
+    navigateTo({
+        path: "/device/add"
+    })
 }
 </script>
 

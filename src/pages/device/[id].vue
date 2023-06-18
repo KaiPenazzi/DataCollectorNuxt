@@ -1,36 +1,32 @@
 <script setup>
+import { onMounted } from 'vue';
+
 definePageMeta({
     middleware: [
-        'auth'
+        "auth"
     ]
 })
+const route = useRoute()
 
-const name = ref(0)
-const username = ref(0)
-const device_id = ref(0)
-const key = ref(0)
+let name = ref(0)
+let username = ref(0)
+let device_id = ref(0)
+let key = ref(0)
 
-function sendDevice()  {
-    useFetch("/api/device", {
-        method: 'post',
-        body: {
-            name: name.value.value,
-            username: username.value.value,
-            device_id: device_id.value.value,
-            key: key.value.value
-        }
-    })
+onMounted(async ()=> {
+    const device = await useFetch('/api/device/' + route.params.id)
 
-    navigateTo({
-        path: '/devices'
-    })
-}
+    name.value.value = device.name
+    username.value.value = device.username
+    device_id.value.value = device.device_id
+    key.value.value = device.key
+})
 
 </script>
 
 <template>
     <div class="card">
-        <div class="card-header">add new device</div>
+        <div class="card-header">update device</div>
         <div class="card-body">
             <input class="form-control" type="text" ref="name" placeholder="name" />
             <input class="form-control" type="text" ref="username" placeholder="username" />
@@ -38,7 +34,7 @@ function sendDevice()  {
             <input class="form-control" type="text" ref="key" placeholder="key" />
         </div>
         <div class="card-footer">
-            <button class="btn btn-success" @click="sendDevice">add</button>
+            <button class="btn btn-success" @click="updateDevice">update</button>
         </div>
     </div>
 </template>
