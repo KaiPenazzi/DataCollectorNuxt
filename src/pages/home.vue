@@ -19,6 +19,10 @@ function formatDate(timestamp) {
     return date.toLocaleString('de')
 }
 
+function openData(id) {
+    navigateTo('/data/' + id)
+}
+
 </script>
 
 <template>
@@ -27,7 +31,7 @@ function formatDate(timestamp) {
             <tr v-for="item in data">
                 <td>
                     <div class="card">
-                        <div class="card-header">{{ item.device.name }} |  {{formatDate(item.data.received_at)}}</div>
+                        <div class="card-header"><a @click="openData(item.device.id)" style="text-decoration: underline;">{{ item.device.name }} |  {{formatDate(item.data.received_at)}}</a></div>
                         <div class="card-body">
                             <ul>
                                 <li v-for="(value, key) in item.data.uplink_message.decoded_payload" :key="key">
