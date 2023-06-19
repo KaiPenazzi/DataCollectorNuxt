@@ -13,7 +13,6 @@ let state = ref(0)
 let deviceid = ref(0)
 
 function sendDevice() {
-    console.log(deviceid.value)
 
     useFetch("/api/action/add", {
         method: 'post',
