@@ -10,6 +10,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Action {
+  id Int @id @default(autoincrement())
+  name String?
+  startAction String?
+  stopAction String?
+  state Boolean?
+  device Device? @relation(fields: [deviceid], references: [id])
+  deviceid Int?
+  user User? @relation(fields: [userid], references: [id])
+  userid Int?
+}
+
 model data {
   id Int @id @default(autoincrement())
   collectedDate DateTime?
@@ -27,6 +39,7 @@ model Device {
   user User? @relation(fields: [userid], references: [id])
   userid Int?
   data data[]
+  actions Action[]
 }
 
 model User {
@@ -34,4 +47,5 @@ model User {
   email String @unique
   password String?
   devices Device[]
+  actions Action[]
 }
