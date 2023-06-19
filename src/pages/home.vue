@@ -22,8 +22,6 @@ function formatDate(timestamp) {
 </script>
 
 <template>
-    <h2>hier kommt die device übersicht hin</h2>
-
     <table class="table">
         <tbody>
             <tr v-for="item in data">
