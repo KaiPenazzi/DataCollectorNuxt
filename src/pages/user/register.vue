@@ -10,7 +10,7 @@ date.setMonth(date.getMonth() + 3)
 function login() {
     document.cookie = 'email=' + email.value.value + '; expires=' + date + ' ; path=/'
     document.cookie = 'psw=' + psw.value.value + '; expires=' + date + ' ; path=/'
-    window.open('/test', '_self')
+    navigateTo('/home')
 }
 
 function register() {
