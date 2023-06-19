@@ -30,6 +30,12 @@ async function remove(id) {
     }
 }
 
+async function action(id) {
+    useFetch('/api/action/' + id, {
+        method: "post"
+    })
+}
+
 </script>
 
 <template>
@@ -41,7 +47,7 @@ async function remove(id) {
                     <div class="card">
                         <div class="card-header">{{ item.name }}</div>
                         <div class="card-body">
-                            <div class="form-check form-switch"><input class="form-check-input" type="checkbox" :checked="item.state"/></div>
+                            <div class="form-check form-switch"><input class="form-check-input" type="checkbox" :checked="item.state" @click="action(item.id)"/></div>
                         </div>
                     </div>
                 </td>
