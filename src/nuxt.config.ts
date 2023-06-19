@@ -13,7 +13,9 @@ export default defineNuxtConfig({
         //jquery
         { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js' },
         { src: 'https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js' },
-        { src: 'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js' }
+        { src: 'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js' },
+        //canvas
+        { src: 'https://canvasjs.com/assets/script/canvasjs.min.js'}
       ],
       link: [
         //google fonts
