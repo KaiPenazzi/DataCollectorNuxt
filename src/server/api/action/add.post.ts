@@ -13,8 +13,6 @@ export default defineEventHandler(async (event) => {
         }
     })
 
-    console.log(action)
-
     if (user != null ) {
         const result = await prisma.action.create({
             data: {
