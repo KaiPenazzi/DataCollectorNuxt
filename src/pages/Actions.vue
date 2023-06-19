@@ -16,6 +16,20 @@ function edit(id) {
     navigateTo('/action/' + id)
 }
 
+async function remove(id) {
+    const confirmed = confirm("confirm to remove the action")
+
+    if (confirmed) {
+        // DELETE-Anfrage an die API senden
+        await useFetch('/api/action/' + id, {
+            method: 'delete'
+        });
+
+        // Seite neu laden
+        location.reload(true);
+    }
+}
+
 </script>
 
 <template>
