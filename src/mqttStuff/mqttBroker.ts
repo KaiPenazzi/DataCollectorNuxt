@@ -14,12 +14,23 @@ interface MQTTClientCstm extends MqttClient {
 }
 
 class MqttBroker {
-    private static clients: MQTTClientCstm[] = [];
-    private static anz: number = 0;
+    private clients: MQTTClientCstm[] = [];
 
     constructor() {
-        MqttBroker.anz++;
-        console.log("constructor call: " + MqttBroker.anz)
+        this.init()
+    }
+
+    private async init() {
+        const result = await prisma.device.findMany()
+
+        for (let i = 0; i < result.length; i++) {
+            this.addClient({
+                id: result[i].id,
+                username: result[i].username + "",
+                device_id: result[i].device_id + "",
+                key: result[i].key + ""
+            })
+        }
     }
 
     public addClient(device: Device): void {
@@ -32,8 +43,7 @@ class MqttBroker {
         client.on("connect", () => {
             console.log(`device: ${device.username} connected: ${client.connected}`);
             client.id = device.id;
-            MqttBroker.clients.push(client);
-            console.log("clients length: " + MqttBroker.clients.length)
+            this.clients.push(client);
         });
 
         client.subscribe(topic);
@@ -51,14 +61,12 @@ class MqttBroker {
         });
 
         client.on('error', function (error) {
-            console.log("Can't connect" + error);
             client.end();
         });
     }
 
     public getClient(id: Number): MQTTClientCstm | undefined {
-        console.log("clients length: " + MqttBroker.clients.length)
-        return MqttBroker.clients.find(client => client.id == id);
+        return this.clients.find(client => client.id == id);
     }
 
     public sendMSG(device: Device, data: string): void {
@@ -80,13 +88,10 @@ class MqttBroker {
                 console.log(err);
                 return;
             }
-
-            console.log("Message sent");
         });
     }
 
     public endClient(id: Number) {
-        console.log("end Client: " + id)
         this.getClient(id)?.end()
     }
 }
