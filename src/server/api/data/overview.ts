@@ -28,10 +28,19 @@ export default defineEventHandler(async (event) => {
             },
         });
 
-        retArry.push({
-            device: user.devices[i],
-            data: JSON.parse(lastItem?.dataString + "")
-        })
+        if (lastItem) {
+            retArry.push({
+                device: user.devices[i],
+                data: JSON.parse(lastItem?.dataString + "")
+            })
+        }
+        else {
+            retArry.push({
+                device: user.devices[i],
+                data: {uplink_message: {decoded_payload: {msg: "wait for the first message"}}}
+            })
+        }
+        
     }
 
     return retArry;
