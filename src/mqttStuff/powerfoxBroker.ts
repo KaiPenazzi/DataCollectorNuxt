@@ -53,6 +53,7 @@ class powerfoxBroker {
                 .catch(error => {
                     // Handle any errors that occurred during the request
                     console.log(error);
+                    this.closeClient(Number(device.id))
                 });
 
         }, 15000)
