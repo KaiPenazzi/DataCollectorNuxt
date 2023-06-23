@@ -11,7 +11,7 @@ const { data } = await useFetch('/api/data/overview')
 const router = useRouter()
 
 setInterval(() => {
-    //router.go(0)
+    router.go(0)
 }, 10000)
 
 function formatDate(timestamp) {
@@ -21,6 +21,10 @@ function formatDate(timestamp) {
 
 function openData(id) {
     navigateTo('/data/mqtt/' + id)
+}
+
+function openDataPF(id) {
+    navigateTo('/data/powerfox/' + id)
 }
 
 </script>

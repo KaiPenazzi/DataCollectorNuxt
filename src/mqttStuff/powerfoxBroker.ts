@@ -68,6 +68,7 @@ class powerfoxBroker {
         if (intervalTimer) {
             clearInterval(intervalTimer); // Stop the interval associated with the specified deviceId
             this.clientIntervals.delete(deviceId); // Remove the device ID and interval timer pair from the map
+            console.log("client closed: " + deviceId)
         }
     }
 
