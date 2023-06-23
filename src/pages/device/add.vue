@@ -33,7 +33,7 @@ function sendDevice()  {
         <div class="card-header">add new device</div>
         <div class="card-body">
             <input class="form-control" type="text" ref="name" placeholder="name" />
-            <input class="form-control" type="text" ref="username" placeholder="username" />
+            <input class="form-control" type="text" ref="username" placeholder="application id" />
             <input class="form-control" type="text" ref="device_id" placeholder="device id" />
             <input class="form-control" type="text" ref="key" placeholder="key" />
         </div>
