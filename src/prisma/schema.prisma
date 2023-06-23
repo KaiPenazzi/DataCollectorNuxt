@@ -42,10 +42,28 @@ model Device {
   actions Action[]
 }
 
+model PowerfoxData {
+  id Int @id @default(autoincrement())
+  watt Float?
+  timestamp DateTime?
+  powerfox Powerfox? @relation(fields: [powerfoxid], references: [id])
+  powerfoxid Int?
+}
+
+model Powerfox {
+  id Int @id @default(autoincrement())
+  name String?
+  auth String?
+  user User? @relation(fields: [userid], references: [id])
+  userid Int?
+  data PowerfoxData[]
+}
+
 model User {
   id Int @id @default(autoincrement())
   email String @unique
   password String?
   devices Device[]
   actions Action[]
+  powerfox Powerfox[]
 }

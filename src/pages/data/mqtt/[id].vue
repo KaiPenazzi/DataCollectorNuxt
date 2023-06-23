@@ -8,7 +8,7 @@ definePageMeta({
 })
 
 const route = useRoute()
-const { data } = await useFetch('/api/data/' + route.params.id)
+const { data } = await useFetch('/api/data/mqtt/' + route.params.id)
 
 onMounted( async () => {
 

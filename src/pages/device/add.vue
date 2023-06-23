@@ -5,40 +5,38 @@ definePageMeta({
     ]
 })
 
-const name = ref(0)
-const username = ref(0)
-const device_id = ref(0)
-const key = ref(0)
-
-function sendDevice()  {
-    useFetch("/api/device", {
-        method: 'post',
-        body: {
-            name: name.value.value,
-            username: username.value.value,
-            device_id: device_id.value.value,
-            key: key.value.value
-        }
-    })
-
-    navigateTo({
-        path: '/devices'
-    })
-}
-
 </script>
 
 <template>
-    <div class="card">
-        <div class="card-header">add new device</div>
-        <div class="card-body">
-            <input class="form-control" type="text" ref="name" placeholder="name" />
-            <input class="form-control" type="text" ref="username" placeholder="application id" />
-            <input class="form-control" type="text" ref="device_id" placeholder="device id" />
-            <input class="form-control" type="text" ref="key" placeholder="key" />
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    MQTT the Thinks Network
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <!-- use component add Device -->
+                   <addDevice/>
+                </div>
+            </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-success" @click="sendDevice">add</button>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Powerfox
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                   <addPowerfox/>
+                </div>
+            </div>
         </div>
     </div>
 </template>

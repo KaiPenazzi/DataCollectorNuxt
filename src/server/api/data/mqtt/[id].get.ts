@@ -1,5 +1,5 @@
-import prisma from '../../../prisma/prisma'
-import cookieParser from '../../../tools/cookieParser'
+import prisma from '../../../../prisma/prisma'
+import cookieParser from '../../../../tools/cookieParser'
 
 interface Graphdata {
     x: String;
@@ -9,7 +9,7 @@ interface Graphdata {
 interface TransformedData {
     title: string;
     data: Graphdata[];
-  }
+}
 
 export default defineEventHandler(async (event) => {
     const deviceId = event.context.params?.id
@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
                     });
                 }
                 else {
-                    const newEntry:TransformedData = {
+                    const newEntry: TransformedData = {
                         title,
                         data: [{
                             x,
@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
             }
 
         }
-        
+
         return transformedArray
     }
 })

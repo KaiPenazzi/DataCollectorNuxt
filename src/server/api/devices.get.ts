@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
         },
         include: {
             devices: true,
+            powerfox: true,
         },
     });
 
@@ -17,5 +18,5 @@ export default defineEventHandler(async (event) => {
         return []; // oder eine geeignete Fehlerbehandlung
     }
 
-    return user.devices;
+    return user;
 })

@@ -18,7 +18,7 @@ async function remove(id) {
 
     if (confirmed) {
         // DELETE-Anfrage an die API senden
-        await useFetch('/api/device/' + id, {
+        await useFetch('/api/device/mqtt/' + id, {
             method: 'delete'
         });
 
@@ -29,16 +29,31 @@ async function remove(id) {
 
 function edit(id) {
     navigateTo({
-        path: "/device/" + id
+        path: "/device/mqtt" + id
     })
 }
+
+async function removePF(id) {
+    const confirmed = confirm("confirm to remove the device")
+
+    if (confirmed) {
+        // DELETE-Anfrage an die API senden
+        await useFetch('/api/device/powerfox/' + id, {
+            method: 'delete'
+        });
+
+        // Seite neu laden
+        location.reload(true);
+    }
+}
+
 </script>
 
 <template>
     <button class="btn btn-success" @click="openAdd">add</button>
     <table class="table">
         <tbody>
-            <tr v-for="item in devices">
+            <tr v-for="item in devices.devices">
                 <td>
                     <div class="card">
                         <div class="card-header">{{ item.name }}</div>
@@ -51,6 +66,18 @@ function edit(id) {
                 <td class="col-3">
                     <button class="btn btn-danger" @click="remove(item.id)">remove</button>
                     <button class="btn btn-primary" @click="edit(item.id)">edit</button>
+                </td>
+            </tr>
+            <tr v-for="item in devices.powerfox">
+                <td>
+                    <div class="card">
+                        <div class="card-header">{{ item.name }}</div>
+                        <div class="card-body">
+                        </div>
+                    </div>
+                </td>
+                <td class="col-3">
+                    <button class="btn btn-danger" @click="removePF(item.id)">remove</button>
                 </td>
             </tr>
         </tbody>
