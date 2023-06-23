@@ -34,7 +34,7 @@ class MqttBroker {
     }
 
     public addClient(device: Device): void {
-        const topic = `v3/${device.username}/devices/${device.device_id}/up`;
+        const topic = `v3/${device.username}@ttn/devices/${device.device_id}/up`;
         const client = connect("mqtt://eu1.cloud.thethings.network", {
             username: device.username,
             password: device.key
