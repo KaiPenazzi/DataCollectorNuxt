@@ -1,4 +1,4 @@
-import prisma from "~/prisma/prisma";
+import prisma from "../prisma/prisma";
 
 interface Device {
     id: Number;
@@ -17,6 +17,7 @@ class powerfoxBroker {
     private async init() {
 
         const result = await prisma.powerfox.findMany()
+        console.log(result.length)
 
         for (let i = 0; i < result.length; i++) {
             this.addClient({
@@ -52,7 +53,7 @@ class powerfoxBroker {
                 })
                 .catch(error => {
                     // Handle any errors that occurred during the request
-                    console.log(error);
+                    console.log("close Client: " + device.id + " msg: " + error);
                     this.closeClient(Number(device.id))
                 });
 
