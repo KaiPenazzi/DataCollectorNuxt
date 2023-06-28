@@ -26,3 +26,5 @@ logs
 # prisma
 dev.db
 dev.db-journal
+
+doc/devices.json
