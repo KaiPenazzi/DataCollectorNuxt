@@ -1,5 +1,6 @@
 import prisma from "../prisma/prisma";
 
+
 interface Device {
     id: Number;
     auth: String;
@@ -27,44 +28,16 @@ class powerfoxBroker {
         }
     }
 
-    addClient(device: Device) {
+    public addClient(device: Device) {
 
-        const timer = setInterval(async () => {
-            fetch('https://backend.powerfox.energy/api/2.0/my/main/current', {
-                headers: {
-                    Authorization: 'Basic ' + device.auth
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    // Process the response data
-                    prisma.powerfoxData.create({
-                        data: {
-                            timestamp: new Date(data.Timestamp * 1000),
-                            watt: data.Watt,
-                            powerfox: {
-                                connect: { id: Number(device.id) }
-                            }
-                        }
-                    })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                })
-                .catch(error => {
-                    // Handle any errors that occurred during the request
-                    console.log("close Client: " + device.id + " msg: " + error);
-                    this.closeClient(Number(device.id))
-                });
-
-        }, 15000)
+        const timer = setInterval( () => this.APICaller(device), 15000)
 
         console.log("datacollection is started: " + device.id)
 
         this.clientIntervals.set(device.id, timer)
     }
 
-    closeClient(deviceId: number) {
+    public closeClient(deviceId: number) {
         const intervalTimer = this.clientIntervals.get(deviceId);
         if (intervalTimer) {
             clearInterval(intervalTimer); // Stop the interval associated with the specified deviceId
@@ -73,6 +46,31 @@ class powerfoxBroker {
         }
     }
 
+    private async APICaller(device: Device) {
+        let res = await fetch('https://backend.powerfox.energy/api/2.0/my/main/current', {
+            headers: {
+                Authorization: 'Basic ' + device.auth
+            }
+        })
+
+        if (res.ok) {
+            let data = await res.json()
+            let ret = await prisma.powerfoxData.create({
+                data: {
+                    timestamp: new Date(data.Timestamp * 1000),
+                    watt: data.Watt,
+                    powerfox: {
+                        connect: { id: Number(device.id) }
+                    }
+                }
+            })
+        }
+        else {
+            this.closeClient(Number(device.id))
+        }
+
+        //heapdump.writeSnapshot('~/Downloads/' + Date.now() + '.heapsnapshot');
+    }
 }
 
 export default powerfoxBroker
