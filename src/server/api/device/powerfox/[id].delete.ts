@@ -1,6 +1,6 @@
 import prisma from '../../../../prisma/prisma'
 import cookieParser from '../../../../tools/cookieParser'
-import broker from '../../../../mqttStuff/broker';
+import { PFBroker } from '../../../../mqttStuff/deviceBrokers';
 
 export default defineEventHandler(async (event) => {
     const id = event.context.params?.id;
@@ -11,6 +11,11 @@ export default defineEventHandler(async (event) => {
                 id: parseInt(id)
             }
         })
+        
+        if (result) {
+            PFBroker.closeClient(result.id)
+        }
 
+        return result
     }
 })
