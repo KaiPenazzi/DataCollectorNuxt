@@ -6,7 +6,7 @@ module.exports = {
       args: 'run start',
       interpreter: 'none',
       autorestart: true,
-      watch: false,
+      watch: true,
       env: {
         NODE_ENV: 'production',
       },
