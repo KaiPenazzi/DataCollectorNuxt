@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'nuxt-app',
-      script: 'npm',
-      args: 'run start',
+      script: 'npx',
+      args: 'nuxi preview',
       interpreter: 'none',
       autorestart: true,
       watch: true,
