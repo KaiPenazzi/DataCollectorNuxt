@@ -1,8 +1,6 @@
-import prisma from '../../../../prisma/prisma'
+import prisma from '../../../utils/prisma'
 import cookieParser from '../../../../tools/cookieParser'
-import broker from '../../../../mqttStuff/broker'
 import stringToBase64 from '../../../../tools/stringToBase64'
-import { PFBroker } from '../../../../mqttStuff/deviceBrokers'
 
 export default defineEventHandler(async (event) => {
     const result = "err"

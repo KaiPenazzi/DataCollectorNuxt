@@ -1,5 +1,3 @@
-import prisma from '../../../prisma/prisma'
-import broker from '../../../mqttStuff/broker'
 
 export default defineEventHandler(async (event) => {
     const id = event.context.params?.id
@@ -16,7 +14,7 @@ export default defineEventHandler(async (event) => {
 
         if (action) {
             if (action?.state) {
-                broker.sendMSG({
+                mqttBroker.sendMSG({
                     id: Number(action.device?.id),
                     username: action.device?.username + "",
                     device_id: action.device?.device_id + "",
@@ -33,7 +31,7 @@ export default defineEventHandler(async (event) => {
                 })
             }
             else {
-                broker.sendMSG({
+                mqttBroker.sendMSG({
                     id: Number(action.device?.id),
                     username: action.device?.username + "",
                     device_id: action.device?.device_id + "",

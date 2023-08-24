@@ -1,6 +1,4 @@
 import {MqttClient, connect} from 'mqtt';
-import hexToBase64 from '../tools/hexToBase64';
-import prisma from '../prisma/prisma';
 
 interface Device {
     id: Number;
@@ -96,4 +94,6 @@ class MqttBroker {
     }
 }
 
-export default MqttBroker;
+const mqttBroker = new MqttBroker()
+
+export default mqttBroker;

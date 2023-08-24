@@ -1,5 +1,3 @@
-import prisma from '../../../prisma/prisma'
-import broker from '../../../mqttStuff/broker';
 
 export default defineEventHandler(async (event) => {
     const id = event.context.params?.id;
@@ -11,6 +9,6 @@ export default defineEventHandler(async (event) => {
             }
         })
 
-        broker.endClient(result.id)
+        mqttBroker.endClient(result.id)
     }
 })

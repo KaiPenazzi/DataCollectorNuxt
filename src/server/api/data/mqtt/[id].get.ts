@@ -1,5 +1,3 @@
-import prisma from '../../../../prisma/prisma'
-import cookieParser from '../../../../tools/cookieParser'
 
 interface Graphdata {
     x: String;

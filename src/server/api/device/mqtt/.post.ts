@@ -1,6 +1,4 @@
-import prisma from '../../../../prisma/prisma'
 import cookieParser from '../../../../tools/cookieParser'
-import broker from '../../../../mqttStuff/broker'
 
 export default defineEventHandler(async (event) => {
     const result = "err"
@@ -27,7 +25,7 @@ export default defineEventHandler(async (event) => {
             }
         })
 
-        broker.addClient({
+        mqttBroker.addClient({
             id: result.id,
             username: result.username + "",
             device_id: result.device_id + "",

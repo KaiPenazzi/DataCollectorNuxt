@@ -1,5 +1,3 @@
-import prisma from "../prisma/prisma";
-
 
 interface Device {
     id: Number;
@@ -73,4 +71,6 @@ class powerfoxBroker {
     }
 }
 
-export default powerfoxBroker
+const PFBroker = new powerfoxBroker()
+
+export default PFBroker
