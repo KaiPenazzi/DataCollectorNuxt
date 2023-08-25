@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 
 interface Graphdata {
     x: String;
@@ -10,6 +11,7 @@ interface TransformedData {
 }
 
 export default defineEventHandler(async (event) => {
+    var prisma = new PrismaClient()
     const deviceId = event.context.params?.id
 
     if (deviceId != undefined) {

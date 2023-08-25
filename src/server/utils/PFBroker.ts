@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 
 interface Device {
     id: Number;
@@ -14,6 +15,7 @@ class powerfoxBroker {
     }
 
     private async init() {
+        const prisma = new PrismaClient()
 
         const result = await prisma.powerfox.findMany()
         console.log(result.length)
@@ -52,6 +54,7 @@ class powerfoxBroker {
         })
 
         if (res.ok) {
+            const prisma = new PrismaClient()
             let data = await res.json()
             let ret = await prisma.powerfoxData.create({
                 data: {

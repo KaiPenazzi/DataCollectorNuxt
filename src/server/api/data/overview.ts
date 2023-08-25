@@ -1,6 +1,8 @@
+import { PrismaClient } from '@prisma/client';
 import cookieParser from '../../../tools/cookieParser'
 
 export default defineEventHandler(async (event) => {
+    const prisma = new PrismaClient()
     let mqtt: any[] = [];
     let powerfox: any[] = [];
     const cookies = cookieParser(event.node.req.headers.cookie)

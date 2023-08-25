@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client';
 import {MqttClient, connect} from 'mqtt';
 
 interface Device {
@@ -19,6 +20,7 @@ class MqttBroker {
     }
 
     private async init() {
+        const prisma = new PrismaClient()
         const result = await prisma.device.findMany()
 
         for (let i = 0; i < result.length; i++) {
@@ -47,6 +49,8 @@ class MqttBroker {
         client.subscribe(topic);
 
         client.on("message", async (topic, msg) => {
+            const prisma = new PrismaClient();
+
             await prisma.data.create({
                 data: {
                     collectedDate: new Date(),

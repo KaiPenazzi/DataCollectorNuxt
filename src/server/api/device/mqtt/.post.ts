@@ -1,6 +1,8 @@
+import { PrismaClient } from '@prisma/client'
 import cookieParser from '../../../../tools/cookieParser'
 
 export default defineEventHandler(async (event) => {
+    const prisma = new PrismaClient()
     const result = "err"
 
     const device = await readBody(event)

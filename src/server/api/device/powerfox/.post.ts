@@ -1,8 +1,9 @@
-import prisma from '../../../utils/prisma'
 import cookieParser from '../../../../tools/cookieParser'
 import stringToBase64 from '../../../../tools/stringToBase64'
+import { PrismaClient } from '@prisma/client'
 
 export default defineEventHandler(async (event) => {
+    const prisma = new PrismaClient()
     const result = "err"
 
     const powerfox = await readBody(event)
