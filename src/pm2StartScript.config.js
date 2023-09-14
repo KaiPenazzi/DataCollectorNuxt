@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'nuxt-app',
-      script: 'npx',
-      args: 'nuxi preview',
+      script: 'bun',
+      args: '.output/server/index.mjs',
       interpreter: 'none',
       autorestart: true,
       watch: true,
